@@ -2,15 +2,12 @@ import React, {Component} from "react";
 import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends Component{
-    renderTitleField = (field)=>{
+    renderField = (field) => {
         return(
             <div className="form-group">
-                <label>Title</label>
+                <label>{field.label}</label>
                 <input
                     className="form-control"
-                    /*onChange={field.input.onChange}
-                    onFocus={field.input.onFocus}
-                    onBlur={field.input.onBlur}*/
                     type="text"
                     {...field.input}
                 />
@@ -22,12 +19,19 @@ class PostsNew extends Component{
         return (
             <form>
                 <Field
+                    label="Title for Post"
                     name="title"
-                    component={this.renderTitleField}
+                    component={this.renderField}
                 />
                 <Field
+                    label="Tags"
                     name="tags"
-                    component={this.renderTagsField}
+                    component={this.renderField}
+                />
+                <Field
+                    label="Post Content"
+                    name="content"
+                    component={this.renderField} 
                 />
             </form>
         );
