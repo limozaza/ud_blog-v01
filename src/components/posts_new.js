@@ -11,6 +11,8 @@ class PostsNew extends Component{
                     type="text"
                     {...field.input}
                 />
+                <p className="help-block text-danger">{field.meta.error}</p>
+                
             </div>
         );
     };
@@ -24,8 +26,8 @@ class PostsNew extends Component{
                     component={this.renderField}
                 />
                 <Field
-                    label="Tags"
-                    name="tags"
+                    label="Categories"
+                    name="categories"
                     component={this.renderField}
                 />
                 <Field
@@ -37,6 +39,26 @@ class PostsNew extends Component{
         );
     }
 }
+
+const validate = (values) => {
+    const errors = {};
+    //Validae the inputs from values
+    if(!values.title || values.title.length < 3){
+        errors.title = "Enter a title that is at least 3 characters!";
+    }
+    if(!values.categories){
+        errors.categories = "Enter some categories!";
+    }
+    if(!values.content){
+        errors.content = "Enter some content please!";
+    }
+    //if errors is empty the form is fine to submit
+    //if errors has any properties redux for assumes form is invalid
+
+    return errors;
+}
+
 export default reduxForm({
+    validate: validate,
     form: 'PostsNewForm'
 })(PostsNew);
