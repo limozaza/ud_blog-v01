@@ -11,6 +11,7 @@ export default (state= {}, action)=>{
             //const newState = {...state };
             //newState[post.id] = post;
             //return newState;
+            console.log(action.payload.data);
             return {...state, [action.payload.data.id]: action.payload.data};
         default:
             return state;
